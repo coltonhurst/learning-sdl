@@ -1,5 +1,5 @@
-#include <iostream>
 #include <SDL2/SDL.h>
+#include <iostream>
 
 const int WINDOW_HEIGHT = 640;
 const int WINDOW_WIDTH = 480;
@@ -20,7 +20,12 @@ int main(int argc, const char * argv[])
     else
     {
         // Create the window.
-        window = SDL_CreateWindow("Window Title", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_HEIGHT, WINDOW_WIDTH, SDL_WINDOW_OPENGL);
+        window = SDL_CreateWindow("Window Title",
+                                  SDL_WINDOWPOS_UNDEFINED,
+                                  SDL_WINDOWPOS_UNDEFINED,
+                                  WINDOW_HEIGHT,
+                                  WINDOW_WIDTH,
+                                  SDL_WINDOW_OPENGL);
         
         // If the window can't be created, print the error.
         if (window == nullptr)
@@ -41,12 +46,13 @@ int main(int argc, const char * argv[])
             SDL_Event event;
             bool quit = false;
             
-            // EVENT LOOP
-            while ((SDL_PollEvent(&event) != 0) && (!quit))
-            {
-                if (event.type == SDL_QUIT)
-                {
-                    quit = true;
+            // Event loop.
+            while (!quit) {
+                while (SDL_PollEvent(&event) != 0) {
+                    if (event.type == SDL_QUIT)
+                    {
+                        quit = true;
+                    }
                 }
             }
         }
