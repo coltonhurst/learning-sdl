@@ -20,7 +20,7 @@ int main(int argc, const char * argv[])
     else
     {
         // Create the window.
-        window = SDL_CreateWindow("Window Title", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_HEIGHT, WINDOW_WIDTH, SDL_WINDOW_SHOWN);
+        window = SDL_CreateWindow("Window Title", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_HEIGHT, WINDOW_WIDTH, SDL_WINDOW_OPENGL);
         
         // If the window can't be created, print the error.
         if (window == nullptr)
@@ -35,6 +35,9 @@ int main(int argc, const char * argv[])
             // Make the screen surface white.
             SDL_FillRect(screenSurface, nullptr, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
             
+            // Update the surface.
+            SDL_UpdateWindowSurface(window);
+            
             SDL_Event event;
             bool quit = false;
             
@@ -44,11 +47,6 @@ int main(int argc, const char * argv[])
                 if (event.type == SDL_QUIT)
                 {
                     quit = true;
-                }
-                else
-                {
-                    // Update the surface.
-                    SDL_UpdateWindowSurface(window);
                 }
             }
         }
